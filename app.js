@@ -1,51 +1,29 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDN1TboNjuATvsf2ciRvfLWk74VvY8WFq0",
-  authDomain: "tee1-a4a80.firebaseapp.com",
-  databaseURL: "https://tee1-a4a80-default-rtdb.firebaseio.com",
-  projectId: "tee1-a4a80",
-  storageBucket: "tee1-a4a80.appspot.com",
-  messagingSenderId: "66035979838",
-  appId: "1:66035979838:web:bde0b73bc44b084ccf236f",
-  measurementId: "G-FWCZ4MKMN9"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 const express = require('express');
 const shortId = require('shortid');
 const createHttpError = require('http-errors');
 const mongoose = require('mongoose');
 const path = require('path');
-const ShortUrl = require('./web/models/url.model');
+const ShortUrl = require('./models/url.model');
 const qrcode = require('qrcode');
-const History = require('./web/models/history.model');
-const Statistics = require('./web/models/statistics.model');
+const History = require('./models/history.model');
+const Statistics = require('./models/statistics.model');
 
-const expressApp = express(); // เปลี่ยนชื่อตัวแปร 'app' เป็น 'expressApp'
-expressApp.use(express.static(path.join(__dirname, 'public')));
-expressApp.use(express.json());
-expressApp.use(express.urlencoded({ extended: false }));
+const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 mongoose.connect('mongodb+srv://admin:1234@cluster0.yvaiuru.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  // useCreateIndex: true, // อย่าใช้งาน useCreateIndex แล้ว เพราะมันไม่ได้รองรับแล้วใน mongoose 7.x
 })
 .then(() => console.log('mongoose connected 💾'))
 .catch((error) => console.error('Error connecting to MongoDB:', error));
 
-expressApp.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
-expressApp.get('/', async (req, res, next) => {
+app.get('/', async (req, res, next) => {
   try {
     const historyItems = await History.find().sort({ createdAt: 'desc' });
     const statistics = await Statistics.find().sort({ clickedAt: 'desc' });
@@ -65,7 +43,7 @@ expressApp.get('/', async (req, res, next) => {
   }
 });
 
-expressApp.post('/', async (req, res, next) => {
+app.post('/', async (req, res, next) => {
   try {
     const { url } = req.body;
     if (!url) {
@@ -115,7 +93,7 @@ expressApp.post('/', async (req, res, next) => {
   }
 });
 
-expressApp.get('/:shortUrl', async (req, res) => {
+app.get('/:shortUrl', async (req, res) => {
   try {
     const shortUrl = await ShortUrl.findOne({ shortId: req.params.shortUrl });
 
@@ -134,7 +112,7 @@ expressApp.get('/:shortUrl', async (req, res) => {
 });
 
 // เส้นทางสำหรับ QR code
-expressApp.get('/:shortId/qr', async (req, res, next) => {
+app.get('/:shortId/qr', async (req, res, next) => {
   try {
     const { shortId } = req.params;
     const shortUrl = await ShortUrl.findOne({ shortId });
@@ -156,14 +134,14 @@ expressApp.get('/:shortId/qr', async (req, res, next) => {
   }
 });
 
-expressApp.use((req, res, next) => {
+app.use((req, res, next) => {
   next(createHttpError.NotFound());
 });
 
-expressApp.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('index', { error: err.message });
 });
 
 const PORT = process.env.PORT || 3000;
-expressApp.listen(PORT, () => console.log(`🌏 Server is running on port ${PORT}...`));
+app.listen(PORT, () => console.log(`🌏 Server is running on port ${PORT}...`));
