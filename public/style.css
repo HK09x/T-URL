@@ -18,6 +18,8 @@ body {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 100%; /* เพิ่มบรรทัดนี้ */
+  overflow-x: hidden; /* เพิ่มบรรทัดนี้ */
 }
 
 h1 {
@@ -87,4 +89,40 @@ button[type='submit'] {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
+}
+
+/* ใช้ Media Queries เพื่อปรับแต่งการแสดงผลสำหรับมือถือ */
+@media (max-width: 768px) {
+  body {
+    justify-content: flex-start; /* ปรับให้เริ่มจากด้านบนของหน้าจอ */
+  }
+
+  .container {
+    max-width: 100%; /* ปรับขนาดเต็มหน้าจอ */
+    overflow-x: hidden; /* ปรับขนาดเต็มหน้าจอ */
+    margin: 10px; /* เพิ่มมาร์จินด้านซ้ายและขวา */
+    border-radius: 0; /* ไม่มีขอบมุม */
+  }
+
+  h1 {
+    font-size: 20px; /* ปรับขนาดตัวอักษรสำหรับหัวข้อ */
+  }
+
+  input[type='url'] {
+    font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับ input URL */
+  }
+
+  button[type='submit'] {
+    font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับปุ่ม */
+  }
+
+  .short-url p {
+    font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับข้อความ Short URL */
+  }
+
+  .history th,
+  .history td {
+    padding: 8px; /* ปรับการเรียงรายการในตาราง */
+    font-size: 14px; /* ปรับขนาดตัวอักษรในตาราง */
+  }
 }
