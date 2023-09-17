@@ -1,23 +1,15 @@
 /* style.css */
 
-/* CSS Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* เพิ่มสีพื้นหลังหน้าเว็บ */
 body {
   background-color: #f0f0f0;
   font-family: 'Nunito', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
@@ -26,8 +18,6 @@ body {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 80%; /* ปรับขนาดความกว้าง */
-  max-width: 400px; /* ปรับขนาดความกว้างสูงสุด */
 }
 
 h1 {
@@ -102,39 +92,44 @@ button[type='submit'] {
 /* ใช้ Media Queries เพื่อปรับแต่งการแสดงผลสำหรับมือถือ */
 @media (max-width: 768px) {
   body {
-    justify-content: flex-start;
+    justify-content: flex-start; /* ปรับให้เริ่มจากด้านบนของหน้าจอ */
   }
 
   .container {
-    width: 100%;
-    max-width: none;
-    margin: 10px;
+    max-width: 100%; /* ปรับขนาดเต็มหน้าจอ */
+    overflow-x: hidden; /* ปรับขนาดเต็มหน้าจอ */
+    margin: 10px; /* เพิ่มมาร์จินด้านซ้ายและขวา */
+    border-radius: 0; /* ไม่มีขอบมุม */
   }
 
   h1 {
-    font-size: 20px;
+    font-size: 20px; /* ปรับขนาดตัวอักษรสำหรับหัวข้อ */
   }
 
   input[type='url'] {
-    font-size: 14px;
+    font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับ input URL */
   }
 
   button[type='submit'] {
-    font-size: 14px;
-    margin-top: 5px;
-    background-color: rgba(63, 81, 181, 0.8);
-    padding: 10px 20px;
-    position: relative;
-    top: -10px;
+    font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับปุ่ม */
+    margin-top: 5px; /* เพิ่มระยะห่างด้านบนเล็กน้อย */
+    background-color: rgba(63, 81, 181, 0.8); /* เปลี่ยนสีพื้นหลังเป็นสีแบบที่ทำให้เป็นสีแบบทึบ */
+    padding: 10px 20px; /* ปรับขนาดของ padding ให้ปุ่มกว้างขึ้น */
+    position: relative; /* เพิ่มตำแหน่งแบบเชิงสัมพันธ์ */
+    top: -10px; /* ย้ายปุ่มขึ้นบนเล็กน้อย */
   }
 
   .short-url p {
-    font-size: 14px;
+    font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับข้อความ Short URL */
   }
 
   .history th,
   .history td {
-    padding: 8px;
-    font-size: 14px;
+    padding: 8px; /* ปรับการเรียงรายการในตาราง */
+    font-size: 14px; /* ปรับขนาดตัวอักษรในตาราง */
   }
+}
+* {
+  margin: 0;
+  padding: 0;
 }
