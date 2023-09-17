@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>URL Shortener</title>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Shortener</h1>
+
+        <% if (locals.error) { %>
+        <p class="error"><%= error %></p>
+        <% } %>
+
+        <form action="/" method="post">
+            <input type="url" name="url" id="url" placeholder="Enter URL here..." />
+            <button type="submit">Create Short URL</button>
+        </form>
+
+        <div class="short-url">
+          <% if (locals.short_url) { %>
+          <img src="/<%= short_url.split('/').pop() %>/qr" alt="QR Code" />
+          <p>Short URL: <a href="<%= short_url %>"><%= short_url %></a></p>
+          <td><%= short_url.clickCount %></td>
+          <% } %>
+        </div>
+
+        <div class="history">
+          <h2>ประวัติ URL และ Short URL</h2>
+          <% if (locals.historyItems) { %>
+            <table>
+              <tr>
+                <th>Original URL</th>
+                <th>Short URL</th>
+                <th>QR Code</th>
+                <th>Click Count</th>
+              </tr>
+              <% for (const history of historyItems) { %>
+                <tr>
+                  <td><a href="<%= history.originalUrl %>" target="_blank"><%= history.originalUrl %></a></td>
+                  <td><a href="<%= history.shortUrl %>" target="_blank"><%= history.shortUrl %></a></td>
+                  <td><img src="/<%= history.shortUrl.split('/').pop() %>/qr" alt="QR Code" /></td>
+                  <td><%= history.clickCount %></td>
+                </tr>                               
+              <% } %>            
+            </table>
+          <% } %>            
+        </div>     
+    </div>
+</body>
+</html>
