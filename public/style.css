@@ -18,8 +18,6 @@ body {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  max-width: 100%; /* เพิ่มบรรทัดนี้ */
-  overflow-x: hidden; /* เพิ่มบรรทัดนี้ */
 }
 
 h1 {
@@ -114,6 +112,11 @@ button[type='submit'] {
 
   button[type='submit'] {
     font-size: 14px; /* ปรับขนาดตัวอักษรสำหรับปุ่ม */
+    margin-top: 5px; /* เพิ่มระยะห่างด้านบนเล็กน้อย */
+    background-color: rgba(63, 81, 181, 0.8); /* เปลี่ยนสีพื้นหลังเป็นสีแบบที่ทำให้เป็นสีแบบทึบ */
+    padding: 10px 20px; /* ปรับขนาดของ padding ให้ปุ่มกว้างขึ้น */
+    position: relative; /* เพิ่มตำแหน่งแบบเชิงสัมพันธ์ */
+    top: -10px; /* ย้ายปุ่มขึ้นบนเล็กน้อย */
   }
 
   .short-url p {
