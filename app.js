@@ -47,7 +47,7 @@ app.post('/', async (req, res, next) => {
   try {
     const { url } = req.body;
     if (!url) {
-      throw createHttpError.BadRequest('Provide a valid URL');
+      throw createHttpError.BadRequest('ใส่ URL');
     }
     const urlExists = await ShortUrl.findOne({ url });
     if (urlExists) {
