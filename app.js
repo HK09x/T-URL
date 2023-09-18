@@ -37,7 +37,7 @@ app.get('/', async (req, res, next) => {
       }
     }
 
-    res.render('index', { historyItems, statistics });
+    res.render('index', { historyItems,  });
   } catch (error) {
     next(error);
   }
