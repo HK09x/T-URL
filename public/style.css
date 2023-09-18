@@ -10,14 +10,16 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+   
 }
 
 .container {
   text-align: center;
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+   
 }
 
 h1 {
@@ -52,7 +54,7 @@ button[type='submit'] {
 
 /* ปรับแต่งส่วนแสดง Short URL */
 .short-url {
-  margin-top: 20px;
+  margin-top: 2px;
 }
 
 .short-url img {
@@ -89,15 +91,16 @@ button[type='submit'] {
   border-bottom: 1px solid #ccc;
 }
 
+/* style.css */
+
 /* ใช้ Media Queries เพื่อปรับแต่งการแสดงผลสำหรับมือถือ */
-@media (max-width: 768px) {
+@media (max-width: 100%) {
   body {
-    justify-content: flex-start; /* ปรับให้เริ่มจากด้านบนของหน้าจอ */
+    width: auto; /* ยกเลิกการกำหนดความกว้างเต็มหน้าจอ */
   }
 
   .container {
     max-width: 100%; /* ปรับขนาดเต็มหน้าจอ */
-    overflow-x: hidden; /* ปรับขนาดเต็มหน้าจอ */
     margin: 10px; /* เพิ่มมาร์จินด้านซ้ายและขวา */
     border-radius: 0; /* ไม่มีขอบมุม */
   }
@@ -129,7 +132,4 @@ button[type='submit'] {
     font-size: 14px; /* ปรับขนาดตัวอักษรในตาราง */
   }
 }
-* {
-  margin: 0;
-  padding: 0;
-}
+
